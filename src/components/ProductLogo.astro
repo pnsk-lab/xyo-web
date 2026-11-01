@@ -1,0 +1,16 @@
+---
+interface Props {
+  kind: string;
+  class?: string;
+}
+const { kind, class: className = 'size-6' } = Astro.props;
+const files: Record<string, string> = {
+  editor: 'xyo-editor',
+  vm: 'xyo-vm',
+  lint: 'xyo-lint',
+  fmt: 'xyo-fmt',
+  hikkaku: 'hikkaku',
+  cloud: 'hikkaku-cloud',
+};
+---
+<img src={`/logos/${files[kind]}.svg`} width="48" height="48" alt="" aria-hidden="true" class:list={['shrink-0', className]} />

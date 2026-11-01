@@ -1,0 +1,121 @@
+---
+import '../styles/global.css';
+import ProductVisual from '../components/ProductVisual.astro';
+import ProductLogo from '../components/ProductLogo.astro';
+
+const layers = [
+  { name: 'create', caption: 'Make an idea tangible', symbol: '✳', color: 'text-[#f48ab9]', top: 'top-[10px] z-30 bg-[linear-gradient(145deg,#bba9ff,#7558ca)]' },
+  { name: 'connect', caption: 'Build on what exists', symbol: '⌁', color: 'text-[#b39bff]', top: 'top-[122px] z-20 bg-[linear-gradient(145deg,#ff86b8,#bd4b85)]' },
+  { name: 'share', caption: 'Let it grow', symbol: '↗', color: 'text-[#83e7de]', top: 'top-[235px] z-10 bg-[linear-gradient(145deg,#74eddf,#268e9d)]' },
+];
+const products: { id: string; name: string; title: string; description: string; kind: string; github?: string; website?: string; comingSoon?: boolean }[] = [
+  { id: 'xyo-editor', name: 'xyo-editor', title: 'The next-generation editor', description: 'A new space for your next idea. Bring your Scratch projects to life, one block at a time.', kind: 'editor', github: 'https://github.com/pnsk-lab/xyo-editor' },
+  { id: 'xyo-vm', name: 'xyo-vm', title: 'The fastest VM in Scratch', description: 'Keep your ideas moving. A virtual machine built around one thing: making Scratch run faster.', kind: 'vm', github: 'https://github.com/pnsk-lab/xyo-cpp' },
+  { id: 'xyo-lint', name: 'xyo-lint', title: 'The linter for Scratch', description: 'See your projects more clearly. Find the little things that stand between your blocks and your intent.', kind: 'lint', comingSoon: true },
+  { id: 'xyo-fmt', name: 'xyo-fmt', title: 'The blazing fast Scratch formatter', description: 'Make room for clarity. Bring a little more order to your Scratch projects, without slowing down.', kind: 'fmt', comingSoon: true },
+  { id: 'hikkaku', name: 'Hikkaku', title: 'The Scratch Compiler for AI', description: 'Connect AI and Scratch. Turn generated ideas into projects you can open, explore, and make your own.', kind: 'hikkaku', github: 'https://github.com/pnsk-lab/hikkaku', website: 'https://pnsk-lab.github.io/hikkaku' },
+  { id: 'hikkaku-cloud', name: 'Hikkaku Cloud', title: 'The AI-powered Scratch Community', description: 'A place for ideas to meet. Create with AI, share what you make, and discover what comes next together.', kind: 'cloud', comingSoon: true },
+];
+const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9ff7ec]';
+const wordmark = 'whitespace-nowrap text-[32px] leading-none font-[850] tracking-[-.09em]';
+const mark = 'ml-[6px] align-top text-[18px] tracking-normal text-[#a98cff]';
+const button = 'inline-flex min-h-12 items-center justify-between gap-[26px] rounded-lg border border-[#42414b] px-[17px] py-[14px] text-sm font-semibold transition-[transform,border-color,background] duration-200 hover:-translate-y-0.5 hover:border-[#ad99ff] motion-reduce:transition-none';
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth motion-reduce:scroll-auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111116" />
+    <meta name="description" content="xyo — The ξυσθείς Scratch Ecosystem. A space for creating, connecting, and sharing with Scratch." />
+    <title>xyo — The ξυσθείς Scratch Ecosystem</title>
+  </head>
+  <body class="m-0 bg-[#15151b] font-[Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe_UI,sans-serif] text-[#f6f5f8] [font-synthesis:none]">
+    <div class="mx-auto max-w-[1440px] bg-[#15151b]" id="top">
+      <header class="flex h-[82px] items-center gap-[58px] border-b border-[#35343e] px-9 max-[850px]:gap-[25px] max-[850px]:px-[22px] max-[680px]:h-[70px]">
+        <a class={`${wordmark} ${focus}`} href="#top" aria-label="xyo home">xyo<span class={mark}>✳</span></a>
+        <nav class="flex gap-[35px] text-[15px] text-[#d7d5de] max-[850px]:gap-[15px] max-[680px]:hidden" aria-label="Main navigation">
+          <a class={`hover:text-[#b9a7ff] ${focus}`} href="#ecosystem">Ecosystem</a><a class={`hover:text-[#b9a7ff] ${focus}`} href="#explore">Explore</a><a class={`hover:text-[#b9a7ff] ${focus}`} href="#about">About</a>
+        </nav>
+        <a class={`ml-auto whitespace-nowrap rounded-lg border border-[#42414b] px-[14px] py-[11px] text-sm hover:text-[#b9a7ff] max-[680px]:px-[11px] max-[680px]:py-[9px] max-[680px]:text-xs ${focus}`} href="https://github.com/pnsk-lab/xyo-web" target="_blank" rel="noopener noreferrer">GitHub <span class="ml-3 text-[#a98cff]" aria-hidden="true">↗</span></a>
+      </header>
+      <main>
+        <section class="grid min-h-[630px] grid-cols-2 border-b border-[#35343e] max-[680px]:grid-cols-1" aria-labelledby="hero-title">
+          <div class="flex flex-col px-10 pt-[123px] pb-[37px] max-[850px]:px-[30px] max-[850px]:pt-20 max-[850px]:pb-8 max-[680px]:min-h-[560px] max-[680px]:px-6 max-[680px]:pt-[75px] max-[680px]:pb-[30px]">
+            <h1 class="mt-[27px] mb-6 text-[clamp(50px,5.2vw,82px)] leading-[1.025] font-semibold tracking-[-.072em] max-[850px]:text-[clamp(46px,5.5vw,62px)] max-[680px]:text-[clamp(50px,11vw,72px)]" id="hero-title">The <span class="text-[#ad99ff]">ξυσθείς</span><br />Scratch<br />Ecosystem<span class="text-[#ad99ff]">.</span></h1>
+            <p class="m-0 max-w-[490px] text-lg leading-[1.6] text-[#b6b4bf]">A place for ideas to take shape, find connections, and become something more.</p>
+            <div class="mt-[42px] flex flex-wrap gap-3">
+              <a class={`${button} border-[#ede9ff] bg-[#ede9ff] text-[#17131f] hover:bg-[#cbbdff] ${focus}`} href="#ecosystem">Explore the ecosystem <span aria-hidden="true">↗</span></a>
+              <a class={`${button} bg-[#1a1a22] ${focus}`} href="#about">What is xyo? <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <div class="relative grid place-items-center overflow-hidden border-l border-[#35343e] bg-[radial-gradient(circle_at_50%_45%,#262039_0%,#1a1824_28%,#15151b_67%)] max-[850px]:min-h-[540px] max-[680px]:min-h-[440px] max-[680px]:border-t max-[680px]:border-l-0" aria-label="Three connected creative blocks labeled create, connect, and share" role="img">
+            <div class="absolute inset-0 bg-[linear-gradient(#77728f_1px,transparent_1px),linear-gradient(90deg,#77728f_1px,transparent_1px)] bg-size-[48px_48px] opacity-[.17] [mask-image:radial-gradient(circle,#000,transparent_72%)]"></div>
+            <div class="absolute h-[520px] w-[520px] rotate-[-18deg] scale-y-[.58] rounded-full border border-[#5e526b] opacity-[.26]"></div>
+            <div class="absolute h-[680px] w-[680px] rotate-[22deg] scale-y-[.58] rounded-full border border-[#5e526b] opacity-[.26]"></div>
+            <div class="relative h-[390px] w-[360px] rotate-[-28deg] skew-x-[6deg] skew-y-[5deg] [filter:drop-shadow(35px_50px_30px_#09090d)] max-[850px]:scale-75 max-[680px]:scale-[.73]">
+              {layers.map((layer) => <div class={`absolute left-[33px] flex h-[150px] w-[290px] -skew-x-[8deg] items-center justify-between rounded-[24px] px-[35px] text-[27px] font-[650] tracking-[-.04em] text-white [box-shadow:inset_0_1px_2px_#ffffff55,0_15px_0_#101018,0_19px_2px_#393141,0_30px_30px_#08080d] ${layer.top}`}><span class="text-[57px] leading-none font-normal">{layer.symbol}</span><span>{layer.name}</span></div>)}
+            </div>
+          </div>
+        </section>
+        <section class="border-b border-[#35343e] px-6 py-20 text-center min-[850px]:py-28" id="ecosystem" aria-labelledby="statement-title">
+          <h2 class="m-0 text-[clamp(42px,6.2vw,88px)] leading-[1.08] font-medium tracking-[-.055em]" id="statement-title">Re-define <span class="inline-block text-[#b29cff]">Scratch.</span></h2>
+          <p class="mx-auto mt-7 max-w-[420px] text-[15px] leading-[1.8] text-[#a9a6b3] min-[850px]:mt-8 min-[850px]:text-base">One idea becomes a project. A project finds people. Together, they make room for what comes next.</p>
+        </section>
+        <section class="grid grid-cols-1 border-b border-[#35343e] lg:grid-cols-[210px_minmax(0,1fr)]" id="explore" aria-label="Explore the ecosystem">
+          <aside class="min-w-0 border-b border-[#35343e] lg:border-r lg:border-b-0">
+            <nav class="flex gap-2 overflow-x-auto p-4 lg:sticky lg:top-8 lg:flex-col lg:gap-1 lg:px-5 lg:py-10" aria-label="Products">
+              {products.map((product, index) => <a href={`#${product.id}`} data-product-link aria-current={index === 0 ? 'location' : undefined} class={`flex shrink-0 items-center gap-3 rounded-md px-3 py-3 text-sm text-[#96909f] transition-colors hover:bg-white/5 hover:text-white aria-[current=location]:bg-white/5 aria-[current=location]:text-white motion-reduce:transition-none ${focus}`}><ProductLogo kind={product.kind} class="size-6" />{product.name}</a>)}
+            </nav>
+          </aside>
+          <div class="min-w-0">
+            {products.map((product) => <article id={product.id} data-product-section class="grid scroll-mt-5 border-b border-[#35343e] last:border-b-0 min-[760px]:grid-cols-2">
+              <div class="flex flex-col items-start px-6 py-10 sm:px-10 lg:py-12">
+                <div class="flex items-center gap-3.5"><ProductLogo kind={product.kind} class="size-10" /><p class="font-mono text-[11px] tracking-[.08em] text-[#aaa3b5]">{product.name.toUpperCase()}</p></div>
+                <h3 class="mt-6 max-w-[370px] text-[clamp(28px,2.5vw,36px)] leading-[1.15] font-medium tracking-[-.035em]">{product.title}</h3>
+                <p class="mt-6 max-w-[340px] text-[15px] leading-[1.75] text-[#aaa6b4]">{product.description}</p>
+                {product.comingSoon && <p class="mt-8 text-sm font-medium text-[#b6b4bf]">Coming soon</p>}
+                {(product.github || product.website) && <div class="mt-8 flex flex-wrap gap-3">
+                  {product.github && <a class={`${button} ${focus}`} href={product.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>}
+                  {product.website && <a class={`${button} ${focus}`} href={product.website} target="_blank" rel="noopener noreferrer">Website <span aria-hidden="true">↗</span></a>}
+                </div>}
+              </div>
+              <ProductVisual kind={product.kind} name={product.name} />
+            </article>)}
+          </div>
+        </section>
+        <section class="border-b border-[#35343e] px-10 pt-[55px] pb-20 max-[680px]:px-6 max-[680px]:pt-10 max-[680px]:pb-[70px]" id="about" aria-labelledby="about-title">
+          <div class="grid grid-cols-2 items-end gap-[50px] max-[680px]:grid-cols-1 max-[680px]:gap-5">
+            <h2 class="mt-[35px] mb-0 text-[clamp(45px,5vw,74px)] leading-[1.04] font-[560] tracking-[-.07em] max-[680px]:mt-[26px]" id="about-title">Built for the<br /><span class="text-[#b29cff]">curious.</span></h2>
+            <div class="max-w-[480px]"><p class="text-lg leading-[1.65] text-[#b6b4bf]">xyo is an invitation to explore the possibilities around Scratch. Follow an idea, make something of your own, and share it with the world.</p></div>
+          </div>
+        </section>
+      </main>
+      <footer class="flex h-[110px] items-center justify-between px-10 text-xs text-[#aaa7b2] max-[680px]:gap-[15px] max-[680px]:px-6"><a class={`${wordmark} text-[27px] text-[#f6f5f8] ${focus}`} href="#top">xyo<span class={`${mark} text-[15px]`}>✳</span></a><span class="max-[680px]:hidden">The ξυσθείς Scratch Ecosystem</span><a class={focus} href="#top">Back to top ↑</a></footer>
+    </div>
+    <script>
+      const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-product-section]'));
+      const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-product-link]'));
+      let scheduled = false;
+      function updateActiveProduct() {
+        const marker = window.innerHeight * 0.35;
+        const active = sections.find(section => {
+          const bounds = section.getBoundingClientRect();
+          return bounds.top <= marker && bounds.bottom > marker;
+        });
+        if (active) links.forEach(link => {
+          if (link.hash === `#${active.id}`) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        scheduled = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!scheduled) {
+          scheduled = true;
+          requestAnimationFrame(updateActiveProduct);
+        }
+      }, { passive: true });
+      updateActiveProduct();
+    </script>
+  </body>
+</html>

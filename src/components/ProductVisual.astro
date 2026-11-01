@@ -1,0 +1,72 @@
+---
+import ProductLogo from './ProductLogo.astro';
+interface Props { kind: string; name: string; }
+const { kind, name } = Astro.props;
+const themes: Record<string, string> = {
+  editor: 'bg-[#33215c] text-[#bca4ff]',
+  vm: 'bg-[#153f39] text-[#7be8c5]',
+  lint: 'bg-[#253652] text-[#90bcff]',
+  fmt: 'bg-[#4b3026] text-[#ffbc86]',
+  hikkaku: 'bg-[#3f234b] text-[#eca2ef]',
+  cloud: 'bg-[#183d4c] text-[#88dbe9]',
+};
+---
+<div class:list={['relative flex min-h-[340px] min-w-0 items-center justify-center overflow-hidden p-7 sm:p-10 lg:min-h-[440px]', themes[kind]]} role="img" aria-label={`${name} concept illustration`}>
+  <svg class="pointer-events-none absolute -inset-1/2 h-[200%] w-[200%] rotate-[-25deg] opacity-25" aria-hidden="true">
+    <defs>
+      <pattern id={`shapes-${kind}`} width="168" height="112" patternUnits="userSpaceOnUse">
+        <path d="M22 25c-9-6-16 4-10 10l10 9 10-9c6-6-1-16-10-10Z" fill="none" stroke="currentColor" stroke-width="2" />
+        <rect x="72" y="14" width="20" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+        <circle cx="24" cy="82" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="m82 69 12 22H70Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        <path d="M121 17h9l3 4h9l3-4h7a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3h-9l-3 4h-9l-3-4h-7a3 3 0 0 1-3-3V20a3 3 0 0 1 3-3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        <path d="M120 75h32a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5h-32a5 5 0 0 1-5-5V80a5 5 0 0 1 5-5Z" fill="none" stroke="currentColor" stroke-width="2" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill={`url(#shapes-${kind})`} />
+  </svg>
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_10%,transparent_0%,#0d0d1680_80%)]"></div>
+  <div class="relative w-full max-w-[500px] overflow-hidden rounded-lg border border-white/20 bg-[#14131c] shadow-[0_25px_70px_#0006]">
+    <div class="flex h-10 items-center gap-1.5 border-b border-white/10 px-4">
+      <span class="size-1.5 rounded-full bg-white/30"></span><span class="size-1.5 rounded-full bg-white/20"></span><span class="size-1.5 rounded-full bg-white/10"></span>
+      <ProductLogo kind={kind} class="ml-2 size-4" /><span class="font-mono text-[10px] tracking-wide text-[#96909f]">{name} <span class="text-[#625d70]">/</span> playground</span>
+    </div>
+    {kind === 'editor' && <div class="grid min-h-[235px] grid-cols-[44px_1fr]">
+      <div class="flex flex-col items-center gap-5 border-r border-white/10 py-5"><span class="size-3 rounded bg-[#bca4ff]"></span><span class="size-3 rounded bg-[#efb66e]"></span><span class="size-3 rounded bg-[#83d9b6]"></span><span class="size-3 rounded bg-[#e18daf]"></span></div>
+      <div class="relative overflow-hidden p-6 [background-image:radial-gradient(#ffffff15_1px,transparent_1px)] bg-size-[14px_14px]">
+        <div class="w-fit rounded-t-xl rounded-b-md bg-[#ce9b48] px-4 py-2 text-xs font-medium text-[#211a0e]">when <span class="px-1">⚑</span> clicked</div>
+        <div class="ml-1 w-fit rounded bg-[#7860bf] px-4 py-2 text-xs text-white">say <span class="rounded-full bg-white/20 px-3 py-1">Hello, world!</span></div>
+        <div class="ml-1 w-fit rounded bg-[#547ebf] px-4 py-2 text-xs text-white">move <span class="rounded-full bg-white/20 px-3 py-1">10</span> steps</div>
+        <div class="mt-7 flex items-center gap-2 text-[10px] text-[#a7a1b5]"><span class="size-1.5 rounded-full bg-[#bca4ff]"></span>An idea, in motion.</div>
+      </div>
+    </div>}
+    {kind === 'vm' && <div class="p-7 font-mono text-xs">
+      <p class="text-[#8a8596]">PROJECT <span class="float-right text-[#7be8c5]">RUNNING</span></p>
+      <div class="my-9 flex h-20 items-end gap-1.5" aria-hidden="true">{['h-[24%]','h-[40%]','h-[32%]','h-[58%]','h-[45%]','h-[70%]','h-[53%]','h-[79%]','h-[61%]','h-[90%]','h-[76%]','h-full','h-[87%]','h-[94%]','h-full','h-[92%]'].map(height => <div class={`flex-1 rounded-t-sm bg-[#7be8c5]/60 ${height}`}></div>)}</div>
+      <div class="flex justify-between border-t border-white/10 pt-4 text-[#aca6b9]"><span>blocks → execution</span><span class="text-[#7be8c5]">▶</span></div>
+    </div>}
+    {kind === 'lint' && <div class="space-y-5 p-6 font-mono text-[11px] leading-6">
+      <p class="text-[#8a8596]">example.sb3</p>
+      <div class="border-l-2 border-[#e6bd78] bg-[#e6bd78]/5 px-3 py-2"><p class="text-[#e6bd78]">! Unused variable</p><p class="text-[#aaa4b6]">“score” is never read.</p></div>
+      <div class="border-l-2 border-[#90bcff] bg-[#90bcff]/5 px-3 py-2"><p class="text-[#90bcff]">↳ Take a closer look</p><p class="text-[#aaa4b6]">Cleaner blocks. Clearer intent.</p></div>
+    </div>}
+    {kind === 'fmt' && <div class="p-6">
+      <div class="mb-5 flex justify-between font-mono text-[10px] text-[#9992a6]"><span>BEFORE</span><span class="text-[#ffbc86]">→</span><span>AFTER</span></div>
+      <div class="grid grid-cols-2 gap-8">
+        <div class="space-y-3 py-3"><div class="ml-3 h-5 w-4/5 rounded bg-[#ffbc86]/25"></div><div class="h-5 w-3/5 rounded bg-[#ffbc86]/40"></div><div class="ml-5 h-5 w-4/5 rounded bg-[#ffbc86]/25"></div><div class="ml-2 h-5 w-3/5 rounded bg-[#ffbc86]/40"></div></div>
+        <div class="space-y-1 border-l border-white/10 py-3 pl-6"><div class="h-5 w-full rounded bg-[#ffbc86]/80"></div><div class="h-5 w-4/5 rounded bg-[#ffbc86]/60"></div><div class="h-5 w-full rounded bg-[#ffbc86]/80"></div><div class="h-5 w-4/5 rounded bg-[#ffbc86]/60"></div></div>
+      </div><p class="mt-5 border-t border-white/10 pt-4 font-mono text-[10px] text-[#aaa4b6]">A little order. A lot more clarity.</p>
+    </div>}
+    {kind === 'hikkaku' && <div class="p-6 font-mono text-xs">
+      <div class="space-y-2 text-[#b7afc3]"><p>cat.<span class="text-[#90bcff]">run</span>(() =&gt; {'{'}</p><p class="pl-4"><span class="text-[#90bcff]">whenFlagClicked</span>(() =&gt; {'{'}</p><p class="pl-8"><span class="text-[#90bcff]">moveSteps</span>(<span class="text-[#e6bd78]">10</span>)</p><p class="pl-4">{'}'})</p><p>{'}'})</p></div>
+      <div class="my-6 flex items-center gap-3 text-[#eca2ef]"><span class="h-px flex-1 bg-white/10"></span><span>↓ compile</span><span class="h-px flex-1 bg-white/10"></span></div>
+      <div class="flex items-center justify-between rounded border border-[#eca2ef]/25 bg-[#eca2ef]/5 p-4"><span>Scratch project</span><span class="rounded bg-[#eca2ef]/10 px-2 py-1 text-[10px]">.sb3</span></div>
+    </div>}
+    {kind === 'cloud' && <div class="p-6">
+      <div class="mb-5 flex items-center gap-2"><ProductLogo kind="cloud" class="size-7" /><span class="text-xs text-[#c8c2d1]">What will you make today?</span></div>
+      <div class="grid grid-cols-3 gap-2.5">
+        <div class="flex aspect-square items-center justify-center rounded-lg bg-[#bca4ff]/15 text-4xl text-[#bca4ff]">✳</div><div class="flex aspect-square items-center justify-center rounded-lg bg-[#88dbe9]/15 text-4xl text-[#88dbe9]">⌁</div><div class="flex aspect-square items-center justify-center rounded-lg bg-[#eca2ef]/15 text-4xl text-[#eca2ef]">↗</div>
+      </div><div class="mt-5 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[10px] text-[#aaa4b6]"><span>create · connect · share</span><span class="text-[#88dbe9]">✦</span></div>
+    </div>}
+  </div>
+</div>
