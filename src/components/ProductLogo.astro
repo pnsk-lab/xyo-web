@@ -13,4 +13,4 @@ const files: Record<string, string> = {
   cloud: 'hikkaku-cloud',
 };
 ---
-<img src={`/logos/${files[kind]}.svg`} width="48" height="48" alt="" aria-hidden="true" class:list={['shrink-0', className]} />
+<img src={`${import.meta.env.BASE_URL}logos/${files[kind]}.svg`} width="48" height="48" alt="" aria-hidden="true" class:list={['shrink-0', className]} />
